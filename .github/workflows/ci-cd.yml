@@ -19,6 +19,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          context: ./build/restapi/
-          file: ./build/restapi/Dockerfile
+          context: .
+          file: build/restapi/Dockerfile
           tags: ghcr.io/veremchukvv/plantbook/restapi:latest
