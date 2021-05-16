@@ -7,7 +7,7 @@ jobs:
     name: Push Docker image to GitHub Container Registry
     runs-on: self-hosted
     steps:
-      - name: Check out repo
+      - name: Check out the repo
         uses: actions/checkout@v2
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v1
