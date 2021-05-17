@@ -5,23 +5,19 @@ on:
     types: [closed]
     branches:
       - master
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
-if: github.event.pull_request.merged
-
-  steps:
-    - name: checkout
+    if: github.event.pull_request.merged
+    steps:
+      - name: checkout
       if: github.event.pull_request.merged
       uses: actions/checkout@v2
-with:
-ref: master
-  needs: push_docker_image_to_github_packages
-  name: Set Kubernetes Context
-  uses: azure/k8s-set-context@v1
-    with:
+      with:
+      ref: master
+      - name: Set Kubernetes Context
+      uses: azure/k8s-set-context@v1
+      with:
       method: kubeconfig
       kubeconfig: ${{ secrets.K8S_CONFIG }} # Use secret (https://developer.github.com/actions/managing-workflows/storing-secrets/)
-  run:
-    kubectl apply -f deployment.yml
+      run: kubectl apply -f deployment.yml
