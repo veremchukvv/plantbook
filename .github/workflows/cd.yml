@@ -4,20 +4,27 @@ on:
   pull_request:
     types: [closed]
     branches:
-      - master
+      - main
 jobs:
   deploy:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged
     steps:
-      - name: checkout
-      if: github.event.pull_request.merged
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
       with:
-      ref: master
-      - name: Set Kubernetes Context
-      uses: azure/k8s-set-context@v1
+        ref: master
+    - uses: Azure/docker-login@v1
       with:
-      method: kubeconfig
-      kubeconfig: ${{ secrets.K8S_CONFIG }} # Use secret (https://developer.github.com/actions/managing-workflows/storing-secrets/)
-      run: kubectl apply -f deployment.yml
+        login-server: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.CR_PAT }}
+    - uses: Azure/k8s-set-context@v1
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.K8S_CONFIG }} # Use secret (https://developer.github.com/actions/managing-workflows/storing-secrets/)
+    - uses: Azure/k8s-deploy@v1.4
+        with:
+          manifests: |
+            ./deploy/deployment.yml
+          images: |
+            ghcr.io/veremchukvv/plantbook/restapi:latest
