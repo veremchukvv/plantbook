@@ -48,6 +48,7 @@ spec:
   rules:
     - http:
         paths:
-          - backend:
-              serviceName: plantbook
-              servicePort: 8081
+          backend:
+          service: plantbook
+          port:
+            number: 8081
