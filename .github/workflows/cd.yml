@@ -17,9 +17,10 @@ jobs:
     - uses: Azure/k8s-set-context@v1
       with:
         method: kubeconfig
-        kubeconfig: ${{ secrets.K8S_CONFIG }} # Use secret (https://developer.github.com/actions/managing-workflows/storing-secrets/)
+        kubeconfig: ${{ secrets.K8S_CONFIG }}
     - uses: Azure/k8s-deploy@v1.4
       with:
+        namespace: 'g1-vladimir'
         manifests: |
           ./deploy/deployment.yml
         images: |
