@@ -23,8 +23,8 @@ jobs:
         method: kubeconfig
         kubeconfig: ${{ secrets.K8S_CONFIG }} # Use secret (https://developer.github.com/actions/managing-workflows/storing-secrets/)
     - uses: Azure/k8s-deploy@v1.4
-        with:
-          manifests: |
-            ./deploy/deployment.yml
-          images: |
-            ghcr.io/veremchukvv/plantbook/restapi:latest
+      with:
+        manifests: |
+          ./deploy/deployment.yml
+        images: |
+          ghcr.io/veremchukvv/plantbook/restapi:latest
