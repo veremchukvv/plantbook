@@ -1,8 +1,7 @@
 name: Deploy
 
 on:
-  pull_request:
-    types: [closed]
+  push:
     branches:
       - main
 jobs:
@@ -11,8 +10,6 @@ jobs:
     if: github.event.pull_request.merged
     steps:
     - uses: actions/checkout@v2
-      with:
-        ref: master
     - uses: Azure/docker-login@v1
       with:
         login-server: ghcr.io
