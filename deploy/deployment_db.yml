@@ -59,11 +59,7 @@ spec:
             - containerPort: 5432
       initContainers:
         name: migrate
-        image: migrate/migrate:v4.14.1
-
-
-
-
+        image: ghcr.io/veremchukvv/plantbook/migrations:latest
 ---
 apiVersion: v1
 kind: Service
