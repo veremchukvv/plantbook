@@ -73,13 +73,6 @@ jobs:
           context: .
           file: ./build/restapi/Dockerfile
           tags: ghcr.io/veremchukvv/plantbook/restapi:latest
-      - name: Push migration container to GitHub Packages
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          context: .
-          file: ./build/migrate/Dockerfile
-          tags: ghcr.io/veremchukvv/plantbook/migrations:latest
   deploy:
     needs: push_to_registry
     runs-on: ubuntu-latest
@@ -101,4 +94,3 @@ jobs:
             ./deploy/deployment_db.yml
           images: |
             ghcr.io/veremchukvv/plantbook/restapi:latest
-            ghcr.io/veremchukvv/plantbook/migrations:latest
