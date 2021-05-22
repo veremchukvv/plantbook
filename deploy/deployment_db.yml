@@ -58,8 +58,10 @@ spec:
           ports:
             - containerPort: 5432
       initContainers:
-        name: migrate
-        image: ghcr.io/veremchukvv/plantbook/migrations:latest
+        - name: migrations
+          image: migrate/migrate:latest
+          command: [ '/migrate' ]
+          args: [ '-source', 'github://kaatinga/plantbook/database/migrations_schema#ref', '-database', 'postgresql://plantbook_admin:mypassword@plantbook-testdb:5432/plantbook_admin?sslmode=disable', 'up' ]
 ---
 apiVersion: v1
 kind: Service
