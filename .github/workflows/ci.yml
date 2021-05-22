@@ -1,4 +1,4 @@
-name: Publish
+name: CI_CD
 on:
   push:
     branches:
@@ -12,8 +12,8 @@ jobs:
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v2
         with:
-          # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
           version: v1.38
+
   tests:
     needs: golangci
     strategy:
@@ -26,10 +26,8 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: ${{ matrix.go-version }}
-
       - name: Checkout code
         uses: actions/checkout@v2
-
       - name: Restore Cache
         uses: actions/cache@v2
         with:
@@ -40,20 +38,21 @@ jobs:
       - name: Test
         run: go test .
 
-    codecov:
-      needs: tests
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-          with:
-            fetch-depth: 2
-        - uses: actions/setup-go@v2
-          with:
-            go-version: '1.16'
-        - name: Run coverage
-          run: go test -coverprofile=coverage.txt -covermode=atomic
-        - name: Upload coverage to Codecov
-          run: bash <(curl -s https://codecov.io/bash)
+  codecov:
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '1.16'
+      - name: Run coverage
+        run: go test -coverprofile=coverage.txt -covermode=atomic
+      - name: Upload coverage to Codecov
+        run: bash <(curl -s https://codecov.io/bash)
+
   push_to_registry:
     needs: [golangci, tests]
     name: Push Docker image to GitHub Container Registry
@@ -74,6 +73,7 @@ jobs:
           context: .
           file: ./build/restapi/Dockerfile
           tags: ghcr.io/veremchukvv/plantbook/restapi:latest
+
   deploy:
     needs: push_to_registry
     runs-on: ubuntu-latest
