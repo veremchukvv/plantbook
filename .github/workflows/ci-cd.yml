@@ -82,9 +82,10 @@ jobs:
     name: 123
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: actions/checkout@v2
       - name: precheck
-        - uses: actions/checkout@v2
-        - uses: Azure/k8s-set-context@v1
+        uses: Azure/k8s-set-context@v1
           with:
             method: kubeconfig
             kubeconfig: ${{ secrets.K8S_CONFIG }}
