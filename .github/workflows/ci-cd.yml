@@ -93,6 +93,7 @@ jobs:
         id: status
         run: |
           OUTPUT=$(kubectl rollout status deployment plantbook) && echo "::set-output name=OUTPUT::$OUTPUT"
+          echo $OUTPUT
       - name: full deploy
         if: steps.main.outputs.OUTPUT == 'deployment "plantbook" successfully rolled out'
         uses: Azure/k8s-deploy@v1.4
@@ -105,5 +106,5 @@ jobs:
       - name: re-roll
         if: steps.main.outputs.OUTPUT != 'deployment "plantbook" successfully rolled out'
         run: |
-          echo $OUTPUT
+          echo steps.main.outputs.OUTPUT
           kubectl delete po -l app=plantbook
