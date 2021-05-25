@@ -81,7 +81,7 @@ jobs:
     needs: push_to_registry
     runs-on: ubuntu-latest
     steps:
-      - name:
+      - name: precheck
         id: status
         - uses: actions/checkout@v2
         - uses: Azure/k8s-set-context@v1
