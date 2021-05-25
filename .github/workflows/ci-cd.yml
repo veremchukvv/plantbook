@@ -84,11 +84,12 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      - name: precheck
+      - name: kube login
         uses: Azure/k8s-set-context@v1
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.K8S_CONFIG }}
+      - name: precheck
         id: status
         run: |
           OUTPUT = $(kubectl rollout status deployment plantbook) && echo "::set-output name=OUTPUT::$OUTPUT"
