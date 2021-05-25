@@ -82,23 +82,25 @@ jobs:
     name: 123
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: kube login
+        uses: Azure/k8s-set-context@v1
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.K8S_CONFIG }}
       - name: precheck
-        - uses: actions/checkout@v2
-        - uses: Azure/k8s-set-context@v1
-          with:
-            method: kubeconfig
-            kubeconfig: ${{ secrets.K8S_CONFIG }}
         id: status
         run: |
           OUTPUT = $(kubectl rollout status deployment plantbook) && echo "::set-output name=OUTPUT::$OUTPUT"
       - name: full deploy
         if: steps.main.outputs.OUTPUT == "deployment 'plantbook' successfully rolled out"
         uses: Azure/k8s-deploy@v1.4
-          with:
-            namespace: 'g1-vladimir'
-            manifests: |
-              ./deploy/deployment.yml
-            images: |
+        with:
+          namespace: 'g1-vladimir'
+          manifests: |
+            ./deploy/deployment.yml
+          images: |
               ghcr.io/veremchukvv/plantbook/restapi:latest
       - name: re-roll
         if: steps.main.outputs.OUTPUT != "deployment 'plantbook' successfully rolled out"
