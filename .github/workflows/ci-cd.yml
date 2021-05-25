@@ -92,10 +92,9 @@ jobs:
       - name: precheck
         run: |
           OUTPUT=$(kubectl rollout status deployment plantbook) && echo "::set-output name=OUTPUT::$OUTPUT"
-          echo "${{ steps.status.outputs.OUTPUT }}"
         id: status
       - name: full deploy
-        if: steps.status.outputs.OUTPUT == 'deployment "plantbook" successfully rolled out'
+        if: steps.status.outputs.OUTPUT != 'deployment "plantbook" successfully rolled out'
         uses: Azure/k8s-deploy@v1.4
         with:
           namespace: 'g1-vladimir'
@@ -104,7 +103,7 @@ jobs:
           images: |
               ghcr.io/veremchukvv/plantbook/restapi:latest
       - name: re-roll
-        if: steps.status.outputs.OUTPUT != 'deployment "plantbook" successfully rolled out'
+        if: steps.status.outputs.OUTPUT == 'deployment "plantbook" successfully rolled out'
         run: |
           echo "${{ steps.status.outputs.OUTPUT }}"
           kubectl delete po -l app=plantbook
