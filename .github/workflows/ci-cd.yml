@@ -82,12 +82,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: precheck
-        id: status
         - uses: actions/checkout@v2
         - uses: Azure/k8s-set-context@v1
             with:
               method: kubeconfig
               kubeconfig: ${{ secrets.K8S_CONFIG }}
+        id: status
         run: |
           OUTPUT = $(kubectl rollout status deployment plantbook) && echo "::set-output name=OUTPUT::$OUTPUT"
       - name: full deploy
