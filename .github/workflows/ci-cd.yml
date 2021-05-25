@@ -94,7 +94,7 @@ jobs:
         run: |
           OUTPUT = $(kubectl rollout status deployment plantbook) && echo "::set-output name=OUTPUT::$OUTPUT"
       - name: full deploy
-        if: steps.main.outputs.OUTPUT == "deployment 'plantbook' successfully rolled out"
+        if: steps.main.outputs.OUTPUT == 'deployment "plantbook" successfully rolled out'
         uses: Azure/k8s-deploy@v1.4
         with:
           namespace: 'g1-vladimir'
