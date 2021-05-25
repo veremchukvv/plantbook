@@ -91,7 +91,7 @@ jobs:
           kubeconfig: ${{ secrets.K8S_CONFIG }}
       - name: precheck
         run: |
-          OUTPUT=$(kubectl rollout status deployment plantbook) && echo "::set-output name=OUTPUT::$OUTPUT"
+          OUTPUT=$(kubectl rollout status deployment plantbook 2>&1) && echo "::set-output name=OUTPUT::$OUTPUT"
         id: status
       - name: full deploy
         if: steps.status.outputs.OUTPUT != 'deployment "plantbook" successfully rolled out'
@@ -105,5 +105,4 @@ jobs:
       - name: re-roll
         if: steps.status.outputs.OUTPUT == 'deployment "plantbook" successfully rolled out'
         run: |
-          echo "${{ steps.status.outputs.OUTPUT }}"
           kubectl delete po -l app=plantbook
