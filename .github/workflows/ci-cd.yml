@@ -103,6 +103,6 @@ jobs:
           images: |
               ghcr.io/veremchukvv/plantbook/restapi:latest
       - name: re-roll
-        if: steps.main.outputs.OUTPUT != "deployment 'plantbook' successfully rolled out"
+        if: steps.main.outputs.OUTPUT != 'deployment "plantbook" successfully rolled out'
         run: |
           kubectl delete po -l app=plantbook
