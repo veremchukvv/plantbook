@@ -105,4 +105,5 @@ jobs:
       - name: re-roll
         if: steps.main.outputs.OUTPUT != 'deployment "plantbook" successfully rolled out'
         run: |
+          echo $OUTPUT
           kubectl delete po -l app=plantbook
