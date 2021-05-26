@@ -92,6 +92,7 @@ jobs:
       - name: precheck
         run: |
           OUTPUT=$(kubectl rollout status deployment plantbook 2>&1) && echo "::set-output name=OUTPUT::$OUTPUT"
+        continue-on-error: true
         id: status
       - name: full deploy
         if: steps.status.outputs.OUTPUT != 'deployment "plantbook" successfully rolled out'
