@@ -5,6 +5,8 @@ package restapi
 import (
 	"crypto/tls"
 	"net/http"
+	"time"
+	"log"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -17,11 +19,26 @@ import (
 
 //go:generate swagger generate server --target ../../plantbook --name Plantbook --spec ../api/swagger.yaml --principal interface{}
 
+const (
+	version          string        = "0.0.2"
+	tokenExpireDelay time.Duration = 7 * 24 * 60 * time.Minute
+)
+
+var (
+	build   string = "_build_ldflags"
+	githash string = "_githash_ldflags"
+	buildAt string = "_git_build_at_ldflags"
+)
+
 func configureFlags(api *operations.PlantbookAPI) {
 	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }
 }
 
 func configureAPI(api *operations.PlantbookAPI) http.Handler {
+
+	log.Printf(build)
+	log.Printf(githash)
+	log.Printf(buildAt)
 	// configure the api here
 	api.ServeError = errors.ServeError
 
