@@ -7,14 +7,6 @@ COPY . ./
 ARG BUILD_NUMBER
 ARG GITSHA
 
-RUN echo $BUILD_NUMBER
-RUN echo $GITSHA
-
-ENV BUILD_NUMBER1=$BUILD_NUMBER
-ENV GITSHA1=$GITSHA
-
-RUN echo $BUILD_NUMBER1
-RUN echo $GITSHA1
 RUN apk update && apk add date
 RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 \
     go build -a -tags netgo -ldflags "-s -w -extldflags '-static' -X 'github.com/veremchukvv/plantbook/internal/api/restapi.build=$BUILD_NUMBER1' -X 'github.com/veremchukvv/plantbook/internal/api/restapi.buildAt=$(date -Iseconds)' -X 'github.com/veremchukvv/plantbook/internal/api/restapi.githash=$GITSHA1'" \

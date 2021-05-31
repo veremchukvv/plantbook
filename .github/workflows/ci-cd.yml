@@ -35,8 +35,8 @@ jobs:
           file: ./build/restapi/Dockerfile
           tags: ghcr.io/veremchukvv/plantbook/restapi:latest
           build-args: |
-            BUILD_NUMBER=111
-            GITSHA=222
+            BUILD_NUMBER=${{ github.sha }}
+            GITSHA=${{ github.build.nummer }}
   deploy:
     needs: push_to_registry
     name: deploy
