@@ -9,7 +9,7 @@ ARG GITSHA
 
 RUN apk update && apk add date
 RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 \
-    go build -a -tags netgo -ldflags "-s -w -extldflags '-static' -X 'github.com/veremchukvv/plantbook/internal/api/restapi.build=$BUILD_NUMBER1' -X 'github.com/veremchukvv/plantbook/internal/api/restapi.buildAt=$(date -Iseconds)' -X 'github.com/veremchukvv/plantbook/internal/api/restapi.githash=$GITSHA1'" \
+    go build -a -tags netgo -ldflags "-s -w -extldflags '-static' -X 'github.com/veremchukvv/plantbook/internal/api/restapi.build=$BUILD_NUMBER' -X 'github.com/veremchukvv/plantbook/internal/api/restapi.buildAt=$(date -Iseconds)' -X 'github.com/veremchukvv/plantbook/internal/api/restapi.githash=$GITSHA'" \
     -o plantbook-server ./cmd/plantbook-server
 
 FROM scratch as app
