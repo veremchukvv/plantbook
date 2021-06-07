@@ -15,7 +15,7 @@ jobs:
           version: v1.38
 
   postman:
-    needs: lint
+    needs: golangci
     name: postman
     runs-on: ubuntu-latest
     steps:
