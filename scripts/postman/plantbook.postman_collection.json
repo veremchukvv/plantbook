@@ -12,50 +12,6 @@
 					"name": "e2e.Scenario#1",
 					"item": [
 						{
-							"name": "CheckReady200",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Ready OK\", function () {",
-											"    pm.response.to.have.status(200);",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"login\": \"root2\",\n  \"password\": \"love\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://{{baseURL}}/health/ready",
-									"protocol": "http",
-									"host": [
-										"{{baseURL}}"
-									],
-									"path": [
-										"health",
-										"ready"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "UserCreate401",
 							"event": [
 								{
@@ -901,52 +857,96 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "HealthLive",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Alive OK\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"login\": \"root2\",\n  \"password\": \"love\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://{{baseURL}}/health/live",
-							"protocol": "http",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"health",
-								"live"
-							]
-						}
-					},
-					"response": []
 				}
 			]
+		},
+		{
+			"name": "HealthLive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Alive OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"login\": \"root2\",\n  \"password\": \"love\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseURL}}/health/live",
+					"protocol": "http",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"health",
+						"live"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CheckReady200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ready OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"login\": \"root2\",\n  \"password\": \"love\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseURL}}/health/ready",
+					"protocol": "http",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"health",
+						"ready"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -972,7 +972,7 @@
 	"variable": [
 		{
 			"key": "baseURL",
-			"value": "127.0.0.1:8085"
+			"value": "plantbook.icu"
 		},
 		{
 			"key": "gardenID",
