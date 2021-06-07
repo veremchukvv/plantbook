@@ -67,3 +67,15 @@ jobs:
         if: steps.status.outputs.OUTPUT == 'deployment "plantbook" successfully rolled out'
         run: |
           kubectl delete po -l app=plantbook
+  postman:
+    needs: deploy
+    name: postman
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: full deploy
+        uses: matt-ball/newman-action@master
+        with:
+          collection: ./scripts/postman/plantbook.postman_collection.json
+          envVar: baseURL=plantbook.icu
