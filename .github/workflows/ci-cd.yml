@@ -25,4 +25,3 @@ jobs:
         uses: matt-ball/newman-action@master
         with:
           collection: ./scripts/postman/plantbook.postman_collection.json
-          env-var: baseURL=plantbook.icu
