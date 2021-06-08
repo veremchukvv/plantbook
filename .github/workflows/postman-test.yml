@@ -8,7 +8,6 @@ on:
 
 jobs:
   postman:
-    needs: golangci
     name: postman
     runs-on: ubuntu-latest
     steps:
