@@ -21,7 +21,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      - name: full deploy
+      - name: API check
         uses: matt-ball/newman-action@master
         with:
           collection: ./scripts/postman/plantbook.postman_collection.json
+          environment: ./scripts/postman/prod.postman_environment.json
