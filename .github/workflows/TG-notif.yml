@@ -6,6 +6,7 @@ on:
 jobs:
   notif:
     name: notif
+    runs-on: ubuntu-latest
     steps:
       - uses: appleboy/telegram-action@master
         name: notif
