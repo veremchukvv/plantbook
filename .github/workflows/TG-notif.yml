@@ -6,10 +6,9 @@ on:
 jobs:
   notif:
     name: notif
-    runs-on: ubuntu-latest
     steps:
       - uses: appleboy/telegram-action@master
-      - name: notif
+        name: notif
         with:
           to: ${{ secrets.TG_chat }}
           token: ${{ secrets.TG_token }}
