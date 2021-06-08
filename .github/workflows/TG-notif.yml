@@ -8,9 +8,8 @@ jobs:
     name: notif
     runs-on: ubuntu-latest
     steps:
-      - name: notif
       - uses: appleboy/telegram-action@master
-        if: always()
+      - name: notif
         with:
           to: ${{ secrets.TG_chat }}
           token: ${{ secrets.TG_token }}
