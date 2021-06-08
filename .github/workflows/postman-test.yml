@@ -2,7 +2,7 @@ name: postman-test
 on:
   workflow_run:
     workflows:
-      - CI-CD
+      - CI_CD
     types:
       - completed
 
