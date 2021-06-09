@@ -15,4 +15,4 @@ jobs:
           token: ${{ secrets.TG_token }}
           format: markdown
           message: |
-            User: [${{github.actor}}](https://github.com/${{github.actor}}) created new ${{ github.event_name }} [#${{ github.event.number }}](${{ github.event.pull_request.html_url }}) from branch ${{ github.head_ref }}
+            User: **{{github.actor}}** created new PR [#${{ github.event.number }}](${{ github.event.pull_request.html_url }}) from branch ${{ github.head_ref }}
