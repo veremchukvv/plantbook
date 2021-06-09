@@ -14,4 +14,4 @@ jobs:
           to: ${{ secrets.TG_chat }}
           token: ${{ secrets.TG_token }}
           message: |
-            User ${{ github.actor }} created new ${{ github.event_name }} -- ${{ github.job_id }}  from branch ${{ github.head_ref }}
+            User: ${{ github.actor }} created new ${{ github.event_name }} -- ${{ github.job }} from branch ${{ github.head_ref }}
