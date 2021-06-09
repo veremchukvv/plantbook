@@ -1,4 +1,4 @@
-name: TG-notif
+name: TG-notifications
 on:
   pull_request:
     branches:
