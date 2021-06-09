@@ -14,9 +14,9 @@ jobs:
         with:
           version: v1.38
       - name: Deploy FAIL Notification
-          if: ${{ failure() }}
-          uses: appleboy/telegram-action@master
-          with:
-            to: ${{ secrets.TG_chat }}
-            token: ${{ secrets.TG_token }}
-            args: CI_CD failed
+        if: ${{ failure() }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TG_chat }}
+          token: ${{ secrets.TG_token }}
+          args: CI_CD failed
