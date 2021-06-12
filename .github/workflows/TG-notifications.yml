@@ -4,7 +4,7 @@ on:
   issues:
 jobs:
   notif:
-    name: notif
+    name: notification
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
