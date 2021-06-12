@@ -1,5 +1,6 @@
 name: TG-notifications
 on:
+  pull_request:
   pull_request_target:
   issues:
 jobs:
@@ -9,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: send telegram notification on pull-request
-        if: github.event_name == 'pull_request_target'
+        if: github.event_name == 'pull_request_target' || github.event_name == 'pull_request'
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TG_chat }}
