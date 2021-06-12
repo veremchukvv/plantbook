@@ -1,6 +1,6 @@
 name: TG-notifications
 on:
-  pull_request:
+  pull_request_target:
   issues:
 jobs:
   notif:
