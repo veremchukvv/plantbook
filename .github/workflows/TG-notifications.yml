@@ -1,10 +1,11 @@
 name: TG-notifications
 on:
   pull_request_target:
+    types: [assigned, opened, reopened]
   issues:
 jobs:
   notif:
-    name: notif
+    name: notification
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
