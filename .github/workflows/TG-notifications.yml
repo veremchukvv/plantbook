@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: send telegram notification on pull-request
+      - name: send telegram notifications on pull-request
         if: github.event_name == 'pull_request_target'
         uses: appleboy/telegram-action@master
         with:
