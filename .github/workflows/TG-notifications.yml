@@ -1,6 +1,7 @@
 name: TG-notifications
 on:
   pull_request_target:
+    types: [assigned, opened, reopened]
   issues:
 jobs:
   notif:
